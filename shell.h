@@ -19,7 +19,8 @@
 
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 100
-#define INFO_INIT {0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL}
+#define INFO_INIT
+{0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL}
 #define READ_BUFFER_SIZE 1024
 #define MAXIMUM_BUFFER_SIZE 1024
 #define BUFFER_FLUSH '\n'
@@ -177,7 +178,7 @@ char *begins_with(const char *haystack, const char *needle);
 int string_compare(char *str1, char *str2);
 int string_length(char *str);
 /* file12.c */
-int shell_execute( info_t *info);
+int shell_execute(info_t *info);
 int search_builtin(info_t *info);
 void search_command(info_t *info);
 void execute_command(info_t *info);
@@ -195,7 +196,8 @@ void signalInterruptHandler(__attribute__((unused))int signalNumber);
 /* file14.c */
 char **get_environment_strings(info_t *info);
 int remove_environment_variable(info_t *info, char *variableName);
-int set_environment_variable(info_t *info, char *variableName, char *variableValue);
+int set_environment_variable(info_t *info, char *variableName,
+		char *variableValue);
 /* file15.c */
 void initialize_info_struct(info_t *info);
 void populate_info_struct(info_t *info, int argc, char **argv);
