@@ -3,7 +3,7 @@
 * check_interactive_mode - a function that returns true
 * if shell is interactive mode
 * @info: struct address
-* Return: 1 if interactive mode, 0 otherwise
+* Return: 1 if interactive mode, or 0 otherwise
 */
 int check_interactive_mode(info_t *info)
 {
@@ -23,7 +23,7 @@ return (0);
 * is a delimiter.
 * @c: Character to check.
 * @delimiter: Delimiter string.
-* Return: 1 if true, or 0 if false.
+* Return: 1 if true, 0 if false.
 */
 int check_delimiter(char c, char *delimiter)
 {
@@ -38,7 +38,7 @@ return (0);
 * check_alpha - a function that checks
 * for alphabetic character.
 * @c: Character to input.
-* Return: 1 if c is alphabetic, 0 otherwise.
+* Return: 1 if c is alphabetical, or 0 otherwise.
 */
 int check_alpha(int c)
 {

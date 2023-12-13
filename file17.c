@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
- * add_node - adds a node to the start of the list
- * @head: address of pointer to head node
+ * add_node - this function is specific to add a node to a start of a list
+ * @head: An address of a pointer to a head node
  * @str: str field of node
  * Return: size of list
  */
@@ -18,7 +18,7 @@ return (0);
 }
 /**
  * add_node_end - adds a node to the end of the list
- * @head: address of pointer to head node
+ * @head: An address of a pointer to a head node
  * @str: str field of node
  * Return: size of list
  */
@@ -61,8 +61,8 @@ x++;
 return (x);
 }
 /**
- * free_list - frees all nodes of a list
- * @head_ptr: address of pointer to head node
+ * free_list - this function is responsible to free all nodes of a list
+ * @head_ptr: An address of a pointer to a head node
  * Return: void
  */
 void free_list(list_t **head_ptr)

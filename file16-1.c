@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
- * renumber_history - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- *
+ * renumber_history - this function renumbers the history
+ * linked list after changes
+ * @info: Structure containing potential arguments.
  * Return: the new histcount
  */
 int renumber_history(info_t *info)
@@ -21,7 +21,7 @@ return (0);
  * add_history - Adds a new entry to the history list.
  * @info: Pointer to the info_t struct.
  * @line: The command line to add to the history.
- * Return: 0 on success, -1 on failure.
+ * Return: 0 on success, or -1 on failure.
 */
 int add_history(info_t *info, const char *line)
 {

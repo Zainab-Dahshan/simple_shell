@@ -50,7 +50,7 @@ return (info->env_changed);
  * @info: A pointer to an information structure.
  * @variableName: Name of an environment variable to set.
  * @variableValue: Value of an environment variable to set.
- * Return: 0 on success, or 1 on failure.
+ * Return: 0 on success, otherwise 1 on failure.
  */
 int set_environment_variable(info_t *info, char *variableName,
 		char *variableValue)

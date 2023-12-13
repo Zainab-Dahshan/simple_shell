@@ -1,13 +1,14 @@
 #include "shell.h"
 /**
-* string_duplicate - a function that duplicates a string
-* @s: A string to duplicate
-* Return: A pointer to A duplicated string
+* string_duplicate - a main function that duplicates a string
+* @s: String to duplicate
+* Return: Pointer to a duplicated string
 */
 char *string_duplicate(const char *s)
 {
 int length = 0;
 char *result;
+
 if (s == NULL)
 	return (NULL);
 while (*s++)

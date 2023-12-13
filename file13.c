@@ -5,7 +5,8 @@
 * @inputBuffer: Buffer address
 * Return: bytes that read
 */
-ssize_t bufferInput(info_t *info __attribute__((unused)), char **inputBuffer)
+ssize_t bufferInput(info_t *info __attribute__((unused)),
+		char **inputBuffer)
 {
 ssize_t readBytes = 0;
 size_t len_p = 0;
@@ -74,18 +75,19 @@ return (inputBuffer);
 ssize_t readBuffer(info_t *info, char *buffer, size_t *index)
 {
 ssize_t readBytes = 0;
+
 if (*index)
-return (0);
+	return (0);
 readBytes = read(info->readfd, buffer, READ_BUFFER_SIZE);
 if (readBytes >= 0)
-*index = readBytes;
+	*index = readBytes;
 return (readBytes);
 }
 /**
 * getLine - a function that gets a next line of input from STDIN
 * @info: An information structure
 * @pointer: address of pointer to buffer, preallocated or NULL
-* @length: size of preallocated ptr buffer if not NULL
+* @length: size of preallocated pointer buffer if not NULL
 * Return: s
 */
 int getLine(info_t *info, char **pointer, size_t *length)
@@ -96,34 +98,34 @@ size_t position;
 ssize_t readBytes = 0, size = 0;
 char *p = NULL, *newPointer = NULL, *character;
 p = *pointer;
+
 if (p && length)
-size = *length;
+	size = *length;
 if (index == len)
-index = len = 0;
+	index = len = 0;
 readBytes = readBuffer(info, buf, &len);
 if (readBytes == -1 || (readBytes == 0 && len == 0))
-return (-1);
+	return (-1);
 character = strchr(buf + index, '\n');
 position = character ? 1 + (unsigned int)(character - buf) : len;
 newPointer = realloc(p, size ? size + position : position + 1);
 if (!newPointer) /* MALLOC FAILURE! */
-return (p ? free(p), -1 : -1);
+	return (p ? free(p), -1 : -1);
 if (size)
-strncat(newPointer, buf + index, position - index);
+	strncat(newPointer, buf + index, position - index);
 else
-strncpy(newPointer, buf + index, position - index + 1);
-size += position - index;
-index = position;
-p = newPointer;
+	strncpy(newPointer, buf + index, position - index + 1);
+	size += position - index;
+	index = position;
+	p = newPointer;
 if (length)
-*length = size;
-*pointer = p;
+	*length = size;
+	*pointer = p;
 return (size);
 }
 /**
 * signalInterruptHandler - blocks ctrl-C
 * @signalNumber: the signal number
-*
 * Return: void
 */
 void signalInterruptHandler(__attribute__((unused))int signalNumber)

@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * get_history_file - gets the history file
+ * get_history_file - this function is responsible for getting the history file
  * @homedir: the home directory path
  * Return: allocated string containing history file
  */
@@ -48,7 +48,7 @@ return (0);
 /**
  * read_history_list - reads history from file into the parameter struct
  * @info: the parameter struct
- * Return: histcount on success, 0 otherwise
+ * Return: histcount on success, or 0 otherwise
  */
 int read_history_list(info_t *info)
 {
