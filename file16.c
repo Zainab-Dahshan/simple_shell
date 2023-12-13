@@ -1,20 +1,21 @@
 #include "shell.h"
 /**
  * get_history_file - gets the history file
- * @info: parameter struct
+ * @homedir: the home directory path
  * Return: allocated string containing history file
  */
 char *get_history_file(const char *homedir)
 {
 char *buffer =
 	malloc(sizeof(char) * (strlen(homedir) + strlen(HIST_FILE) + 2));
+
 if (buffer == NULL)
 	return (NULL);
 sprintf(buffer, "%s/%s", homedir, HIST_FILE);
 return (buffer);
 }
 /**
- * write_history - creates a file, or appends to an existing file
+ * write_history - writes the command history to a file
  * @info: the parameter struct
  * Return: 1 on success, else -1
  */
@@ -45,7 +46,7 @@ free(filename);
 return (0);
 }
 /**
- * read_history - reads history from file
+ * read_history_list - reads history from file into the parameter struct
  * @info: the parameter struct
  * Return: histcount on success, 0 otherwise
  */
@@ -62,10 +63,11 @@ if (homedir == NULL)
 	return (-1);
 if (fp == NULL)
 	return (-1);
-while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL && line_count < HIST_MAX)
+while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL &&
+		line_count < HIST_MAX)
 {
 if (len > 0 && buffer[len - 1] == '\n')
-buffer[len - 1] = '\0';
+	buffer[len - 1] = '\0';
 if (len > 1 || (len == 1 && buffer[0] != '\n'))
 {
 if (node == NULL)

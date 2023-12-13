@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
- * hsh - The main function that runs shell program.
- * @info: A structure contains information about shell program.
- * Return: last executed command or -2 to exit shell program.
+ * hsh - The main function that runs the shell program.
+ * @info: A structure containing information about the shell program.
+ * Return: The last executed command or -2 to exit the shell program.
  */
 int hsh(info_t *info)
 {
@@ -17,7 +17,7 @@ if (r != -1)
 {
 builtin_ret = find_builtin(info);
 if (builtin_ret == -1)
-find_command(info);
+	find_command(info);
 }
 _putchar('\n');
 }
@@ -32,30 +32,36 @@ exit(info->status);
 return (builtin_ret);
 }
 /**
- * find_builtin - a function that finds if a given command is a built-in
+ * find_builtin - A function that finds if a given command is a built-in
  * command and calls a corresponding function.
- * @info: A structure contains information about shell prog.
- * Return: executed built-in command or -1 if not found.
+ * @info: A structure containing information about the shell program.
+ * Return: The executed built-in command or -1 if not found.
  */
 int find_builtin(info_t *info)
 {
 int i, built_in_ret = -1;
-
+/**
+* struct builtintbl - Structure to map built-in commands to their
+* corresponding functions.
+* @type: The name of the built-in command.
+* @func: Pointer to the corresponding function for the command.
+*/
 struct builtintbl
 {
 const char *type;
 int (*func)(info_t *);
 } builtintbl[] = {
-	{"exit", handle_exit},
-	{"env", current_os_environment},
-	{"help", check_help},
-	{"history", display_history},
-	{"setenv", set_environment},
-	{"unsetenv", unset_environment},
-	{"cd", handle_cd},
-	{"alias", display_alias},
-	{NULL, NULL}
+{"exit", handle_exit},
+{"env", current_os_environment},
+{"help", check_help},
+{"history", display_history},
+{"setenv", set_environment},
+{"unsetenv", unset_environment},
+{"cd", handle_cd},
+{"alias", display_alias},
+{NULL, NULL}
 };
+
 for (i = 0; builtintbl[i].type; i++)
 {
 if (strcmp(info->argv[0], builtintbl[i].type) == 0)

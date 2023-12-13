@@ -102,20 +102,19 @@ char *path;
 char *tokens;
 } info_t;
 
-/*
- * Structure: builtin_table_t
- * --------------------------
- * This structure is used to store information about a built-in command.
- *
- * Members:
- *   - name: A string representing the name of the command.
- *   - function: A function pointer to the corresponding command function.
+/**
+ * struct builtintbl - Structure represent built-in command table
+ * @type: Name of a built-in command
+ * @func: Pointer to corresponding function for a command
+ * Description:
+ * This structure represents built-in commands table used for finding
+ * and executing built-in commands in my shell program.
  */
-typedef struct builtin_table
+struct builtintbl
 {
 const char *type;
 int (*func)(info_t *);
-} builtin_table_t;
+} builtintbl;
 
 extern char **environ;
 
