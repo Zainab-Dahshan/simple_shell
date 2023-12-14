@@ -21,39 +21,28 @@ w++;
 }
 if (numberwords == 0)
 	return (NULL);
-
-s = malloc((1 + numberwords) * sizeof(char *));
+s = malloc((1 + numberwords) *sizeof(char *));
 if (!s)
 	return (NULL);
-
-w = 0;
-x = 0;
 while (x < numberwords)
 {
 while (str[w] == delimiter)
-w++;
-
-y = 0;
+	w++;
 while (str[w + y] != delimiter && str[w + y])
-y++;
-s[x] = malloc((y + 1) * sizeof(char));
+	y++;
+	s[x] = malloc((y + 1) * sizeof(char));
 if (!s[x])
 {
-y = 0;
 while (y < x)
-free(s[y++]);
-free(s);
-return (NULL);
+	free(s[y++]);
+	free(s);
+	return (NULL);
 }
-z = 0;
 while (z < y)
-{
-s[x][z] = str[w++];
-z++;
-}
-s[x][z] = '\0';
-x++;
-}
+	s[x][z] = str[w++];
+	z++;
+	s[x][z] = '\0';
+	x++;
 s[x] = NULL;
 return (s);
 }
