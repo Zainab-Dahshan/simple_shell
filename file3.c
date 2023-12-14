@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * display_history - a function that displays history list, one command by
- * line, preceded with line numbers, starting at 0.
+ * line, preceded with the line numbers, starts at 0.
  * @info: A structure contains potential arguments. Used to maintain
  * constant function prototype.
  * Return: Always 0 on success.

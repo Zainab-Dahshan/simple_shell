@@ -3,7 +3,7 @@
  * current_os_environment - a function that prints the current
  * Environment or operating system.
  * @info: A structure contains potential arguments.
- * Return: 0 on success, or 1 on failure.
+ * Return: 0 on success, otherwise 1 on failure.
  */
 int current_os_environment(info_t *info)
 {
@@ -35,7 +35,7 @@ return (NULL);
 /**
  * set_environment - a function that sets environment variables.
  * @info: A structure contains potential arguments.
- * Return: 0 on success, or 1 on failure.
+ * Return: 0 on success, otherwise 1 on failure.
  */
 int set_environment(info_t *info)
 {
@@ -58,7 +58,7 @@ return (0);
 /**
  * unset_environment - a function that unsets environment variables.
  * @info: A structure contains potential arguments.
- * Return: 0 on success, or 1 on failure
+ * Return: 0 on success, otherwise 1 on failure
  */
 int unset_environment(info_t *info)
 {

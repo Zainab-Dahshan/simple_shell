@@ -2,8 +2,7 @@
 /**
 * print_character - a function that writes a character c to stderr
 * @character: A character to print
-* Return: On success 1. On error, -1 is returned, and errno is
-* set appropriately.
+* Return: On success 1. otherwise -1 On error, -1 is returned.
 */
 int print_character(char character)
 {
@@ -41,8 +40,7 @@ return (0);
 * write_character - a function that writes a character c to a given fd
 * @character: A character to print
 * @file_descriptor: A filedescriptor to write to
-* Return: On success 1. On error, -1 is returned, and errno is
-* set appropriately.
+* Return: On success 1. otherwise -1 on error.
 */
 int write_character(char character, int file_descriptor)
 {

@@ -2,8 +2,8 @@
 /**
  * add_node - this function is specific to add a node to a start of a list
  * @head: An address of a pointer to a head node
- * @str: str field of node
- * Return: size of list
+ * @str: str field of the node
+ * Return: size of the list
  */
 int add_node(list_t **head, char *str)
 {
@@ -19,8 +19,8 @@ return (0);
 /**
  * add_node_end - adds a node to the end of the list
  * @head: An address of a pointer to a head node
- * @str: str field of node
- * Return: size of list
+ * @str: str field of the node
+ * Return: size of the list
  */
 int add_node_end(list_t **head, char *str)
 {
@@ -43,9 +43,10 @@ node->next = new_node;
 return (0);
 }
 /**
- * print_list_string - prints only the str element of a list_t linked list
- * @h: pointer to first node
- * Return: size of list
+ * print_list_string - prints only the str element of
+ * a list_t linked list
+ * @h: pointer to the first node
+ * Return: size of the list
  */
 size_t print_list_string(const list_t *h)
 {
@@ -61,7 +62,8 @@ x++;
 return (x);
 }
 /**
- * free_list - this function is responsible to free all nodes of a list
+ * free_list - this function is responsible for
+ * freeing all nodes of a list
  * @head_ptr: An address of a pointer to a head node
  * Return: void
  */

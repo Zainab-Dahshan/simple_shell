@@ -3,18 +3,22 @@
 * _memset - fills memory with a constant byte
 * @s: the pointer to the memory area
 * @b: the byte to fill *s with
-* @n: the amount of bytes to be filled
+* @n: the bytes to be filled
 * Return: (s) a pointer to the memory area s
 */
 char *_memset(char *s, char b, unsigned int n)
 {
-unsigned int z;
-for (z = 0; z < n; z++)
+unsigned int z = 0;
+
+while (z < n)
+{
 s[z] = b;
+z++;
+}
 return (s);
 }
 /**
-* ffree - frees a string of strings
+* ffree - this function is responsible for freeing a string of strings
 * @pp: string of strings
 */
 void ffree(char **pp)
@@ -28,11 +32,10 @@ free(*pp++);
 free(a);
 }
 /**
-* _realloc - reallocates a block of memory
+* _realloc - this function is specific to reallocate a block of memory
 * @ptr: pointer to previous malloc'ated block
 * @old_size: byte size of previous block
 * @new_size: byte size of new block
-*
 * Return: pointer to da ol'block nameen.
 */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
@@ -52,7 +55,7 @@ if (!p)
 old_size = old_size < new_size ? old_size : new_size;
 
 while (old_size--)
-p[old_size] = ((char *)ptr)[old_size];
+	p[old_size] = ((char *)ptr)[old_size];
 free(ptr);
 return (p);
 }

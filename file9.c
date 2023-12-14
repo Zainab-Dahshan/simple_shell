@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
 * memory_free - a function that deallocates a memory
-* space and sets the pointer to NULL
+* spaces and sets the pointer to NULL
 * @memory: An address of a pointer to deallocate
 * Return: True if deallocated, otherwise False.
 */

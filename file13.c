@@ -114,13 +114,13 @@ if (!newPointer) /* MALLOC FAILURE! */
 if (size)
 	strncat(newPointer, buf + index, position - index);
 else
-	strncpy(newPointer, buf + index, position - index + 1);
-	size += position - index;
-	index = position;
-	p = newPointer;
+strncpy(newPointer, buf + index, position - index + 1);
+size += position - index;
+index = position;
+p = newPointer;
 if (length)
-	*length = size;
-	*pointer = p;
+*length = size;
+*pointer = p;
 return (size);
 }
 /**

@@ -15,7 +15,7 @@ current = current->next;
 }
 /**
  * *_strchr - a function that returns a pointer to a first
- * occurrence of a character in a string.
+ * existance of a character in a string.
  * @s: A pointer to a string to be searched.
  * @c: A character to be found.
  * Return: A pointer to a first occurrence of a character in
@@ -32,7 +32,7 @@ s++;
 return (NULL);
 }
 /**
- * _putchar - a function that prints a character to a standard     output.
+ * _putchar - a function that prints a character to a standard output.
  * @c: A character to be printed.
  */
 void _putchar(char c)
@@ -66,7 +66,7 @@ fprintf(stderr, "Error writing string to standard output\n");
 if (newline_written == -1)
 {
 /* Handle the error as desired */
-/* printing an error message to stderr */
-fprintf(stderr, "Error writing newline character to standard output\n");
+/* printing an error messages to stderr */
+fprintf(stderr, "Error writing a newline character to standard output\n");
 }
 }

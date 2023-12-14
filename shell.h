@@ -19,8 +19,7 @@
 
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 100
-#define INFO_INIT
-{0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL}
+#define INFO_INIT {0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL}
 #define READ_BUFFER_SIZE 1024
 #define MAXIMUM_BUFFER_SIZE 1024
 #define BUFFER_FLUSH '\n'

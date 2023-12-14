@@ -59,7 +59,7 @@ return (0);
  * a head node and checks each node's string to see if it starts
  * with a given prefix and is followed by a specified delimiter
  * character. If a matching node is found, a pointer to that
- * node is returned. If no matching node is found, NULL is returned.
+ * node is returned. If there is no matching node, return to NULL.
  */
 list_t *node_starts_with(list_t *head, const char *prefix, char delimiter)
 {
@@ -75,9 +75,9 @@ node = node->next;
 return (NULL);
 }
 /**
-* replace_vars - replaces vars in the tokenized string
+* replace_vars - this is a dunction that replaces vars in
+* the tokenized string
 * @info: the parameter struct
-*
 * Return: 1 if replaced, 0 otherwise
 */
 void replace_vars(info_t *info)

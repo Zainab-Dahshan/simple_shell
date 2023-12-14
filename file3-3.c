@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * delete_node_at_index - a function that deletes a node at
- * a specified index from a linked list.
+ * a specified an index from the linked list.
  * @head: A pointer to a pointer to a head of a linked list.
  * @index: An index of a node to be deleted.
  * Return: 0 on if it is successful, -1 if a linked list is empty
