@@ -19,7 +19,9 @@
 
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 100
-#define INFO_INIT {0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL}
+#define INFO_INIT \
+{0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, \
+	NULL, 0, 0, NULL, NULL, 0, NULL}
 #define READ_BUFFER_SIZE 1024
 #define MAXIMUM_BUFFER_SIZE 1024
 #define BUFFER_FLUSH '\n'
@@ -103,18 +105,18 @@ char *tokens;
 } info_t;
 
 /**
- * struct builtintbl - Structure represent built-in command table
+ * struct builtin - Structure represent built-in command table
  * @type: Name of a built-in command
  * @func: Pointer to corresponding function for a command
  * Description:
  * This structure represents built-in commands table used for finding
  * and executing built-in commands in my shell program.
  */
-struct builtintbl
+typedef struct builtin
 {
 const char *type;
 int (*func)(info_t *);
-} builtintbl;
+} builtin_table;
 
 extern char **environ;
 
@@ -224,5 +226,15 @@ int is_chain(info_t *info);
 int check_chain(info_t *info);
 list_t *node_starts_with(list_t *head, const char *prefix, char delimiter);
 void replace_vars(info_t *info);
+/* file21 */
+int _count_words(char *str, char *d);
+char *_copy_word(char *str, char *d);
+/*file22.c */
+int count_words(char *str, char delimiter);
+char **allocate_memory(int number_words);
+void copy_words(char **s, char *str, char delimiter, int number_words);
+/* main.c */
+int open_file(info_t *info, char *filename);
+void initialize_info(info_t *info);
 
 #endif

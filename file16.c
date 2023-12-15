@@ -1,18 +1,22 @@
 #include "shell.h"
 /**
- * get_history_file - this function is responsible for getting the history file
+ * get_history_file - this function is responsible
+ * for getting the history file
  * @homedir: the home directory path
  * Return: allocated string containing history file
  */
 char *get_history_file(const char *homedir)
 {
-char *buffer =
-	malloc(sizeof(char) * (strlen(homedir) + strlen(HIST_FILE) + 2));
+char *buffer = malloc(sizeof(char) * (strlen(homedir) +
+			strlen(HIST_FILE) + 2));
 
 if (buffer == NULL)
 	return (NULL);
 sprintf(buffer, "%s/%s", homedir, HIST_FILE);
-return (buffer);
+/* Free the dynamically allocated memory before returning */
+/* Add this line of code */
+free(buffer);
+return (NULL);
 }
 /**
  * write_history - writes the command history to a file
@@ -55,23 +59,25 @@ int read_history_list(info_t *info)
 char *homedir = getenv("HOME");
 FILE *fp = fopen(get_history_file(homedir), "r");
 char buffer[MAXIMUM_BUFFER_SIZE];
+size_t len;
 int line_count = 0;
-size_t len = strlen(buffer);
 list_t *node = malloc(sizeof(list_t));
 
-if (homedir == NULL)
+if (homedir == NULL || fp == NULL)
 	return (-1);
-if (fp == NULL)
-	return (-1);
-while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL &&
-		line_count < HIST_MAX)
+if (node == NULL)
 {
+fclose(fp);
+return (-1);
+}
+while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL && line_count < HIST_MAX)
+{
+len = strlen(buffer);
 if (len > 0 && buffer[len - 1] == '\n')
 	buffer[len - 1] = '\0';
+
 if (len > 1 || (len == 1 && buffer[0] != '\n'))
 {
-if (node == NULL)
-	return (-1);
 node->str = strdup(buffer);
 node->next = info->history;
 info->history = node;

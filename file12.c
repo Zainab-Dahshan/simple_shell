@@ -40,17 +40,8 @@ return (builtin_ret);
 int find_builtin(info_t *info)
 {
 int i, built_in_ret = -1;
-/**
-* struct builtintbl - Structure to map built-in commands to their
-* corresponding functions.
-* @type: The name of the built-in command.
-* @func: Pointer to the corresponding function for the command.
-*/
-struct builtintbl
-{
-const char *type;
-int (*func)(info_t *);
-} builtintbl[] = {
+
+builtin_table builtintbl[] = {
 {"exit", handle_exit},
 {"env", current_os_environment},
 {"help", check_help},
@@ -61,7 +52,17 @@ int (*func)(info_t *);
 {"alias", display_alias},
 {NULL, NULL}
 };
-
+/* Check if the info parameter is valid */
+if (!info)
+{
+return (built_in_ret);
+}
+/* Check if the argv array is properly initialized */
+if (!info->argv)
+{
+return (built_in_ret);
+}
+/* Iterate through the built-in table to find a match */
 for (i = 0; builtintbl[i].type; i++)
 {
 if (strcmp(info->argv[0], builtintbl[i].type) == 0)

@@ -8,12 +8,30 @@ void find_command(info_t *info)
 {
 int i, k;
 
+if (info == NULL)
+{
+printf("info is NULL\n");
+return;
+}
+if (info->argv == NULL)
+{
+printf("info->argv is NULL\n");
+return;
+}
+if (info->argv[0] == NULL)
+{
+printf("info->argv[0] is NULL\n");
+return;
+}
+if (strlen(info->argv[0]) == 0)
+{
+printf("info->argv[0] is an empty string\n");
+return;
+}
 info->path = info->argv[0];
-
 if (info->line_count == 1)
 {
 info->line_count++;
-info->line_count = 0;
 }
 for (i = 0, k = 0; info->argv[i]; i++)
 {
@@ -22,13 +40,11 @@ k++;
 }
 if (!k)
 	return;
-if ((check_interactive_mode(info) || getenv("PATH") ||
-		info->argv[0][0] == '/') && find_builtin(info) == 1)
-fork_command(info);
+if ((check_interactive_mode(info) || getenv("PATH") || info->argv[0][0]
+			== '/') && find_builtin(info) == 1)
+	fork_command(info);
 else if (*(info->argv[0]) != '\n')
-{
-info->status = 127;
-}
+	info->status = 127;
 }
 /**
  * fork_command - a function that forks a child process and
