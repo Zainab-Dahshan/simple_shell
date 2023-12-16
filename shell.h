@@ -207,10 +207,14 @@ void release_info_struct(info_t *info);
 char *get_history_file(const char *homedir);
 int write_history(info_t *info);
 int read_history_list(info_t *info);
+FILE *open_history_file(const char *filename);
+int write_history_node(FILE *fp, const list_t *node);
 /* file16-1.c */
 int renumber_history(info_t *info);
 int add_history(info_t *info, const char *line);
 void free_history(list_t **head);
+/* file16-2.c */
+void close_history_file(FILE *fp);
 /* file17.c */
 int add_node(list_t **head, char *str);
 int add_node_end(list_t **head, char *str);
