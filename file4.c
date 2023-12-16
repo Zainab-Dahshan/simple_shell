@@ -26,7 +26,7 @@ while (node != NULL)
 if (node_starts_with(node, name, '=') != NULL)
 {
 /* found environment variable, return its value */
-return (node->str + strlen(name) + 1);
+return (strdup(node->str + strlen(name) + 1));
 }
 node = node->next;
 }
@@ -39,7 +39,6 @@ return (NULL);
  */
 int set_environment(info_t *info)
 {
-list_t *head = NULL;
 char buffer[1024] = {0};
 const char *name = "example_name";
 const char *value = "example_value";
@@ -50,9 +49,9 @@ fprintf(stderr, "Invalid input to set_environment\n");
 return (0);
 }
 snprintf(buffer, sizeof(buffer), "%s=%s", name, value);
-add_node_end(&info->env_head, buffer);
-add_node_end(&head, "some_string");
-print_list(head);
+add_node_end(&info->env_head, strdup(buffer));
+add_node_end(&info->env_head, strdup("some_string"));
+print_list(info->env_head);
 return (0);
 }
 /**
@@ -93,6 +92,6 @@ int x = 0;
 
 for (x = 0; environ[x] != NULL; x++)
 {
-add_node_end(head, environ[x]);
+add_node_end(head, strdup(environ[x]));
 }
 }

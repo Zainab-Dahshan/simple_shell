@@ -13,10 +13,7 @@ char *buffer = malloc(sizeof(char) * (strlen(homedir) +
 if (buffer == NULL)
 	return (NULL);
 sprintf(buffer, "%s/%s", homedir, HIST_FILE);
-/* Free the dynamically allocated memory before returning */
-/* Add this line of code */
-free(buffer);
-return (NULL);
+return (buffer); /* Return the allocated buffer */
 }
 /**
  * write_history - writes the command history to a file
@@ -30,13 +27,9 @@ char *filename = get_history_file(homedir);
 FILE *fp = fopen(filename, "w");
 list_t *node = info->history;
 
-if (homedir == NULL)
-	return (-1);
-if (filename == NULL)
-	return (-1);
-if (fp == NULL)
+if (homedir == NULL || filename == NULL || fp == NULL)
 {
-free(filename);
+free(filename); /* Free the filename in case of failure */
 return (-1);
 }
 while (node != NULL)
@@ -46,7 +39,7 @@ node = node->next;
 }
 fprintf(fp, "\n");
 fclose(fp);
-free(filename);
+free(filename); /* Free the filename after usage */
 return (0);
 }
 /**
@@ -57,17 +50,17 @@ return (0);
 int read_history_list(info_t *info)
 {
 char *homedir = getenv("HOME");
-FILE *fp = fopen(get_history_file(homedir), "r");
+char *filename = get_history_file(homedir); /* Store the filename */
+FILE *fp = fopen(filename, "r");
 char buffer[MAXIMUM_BUFFER_SIZE];
 size_t len;
 int line_count = 0;
-list_t *node = malloc(sizeof(list_t));
+list_t *head = NULL; /* Declare a pointer to the head of the list */
+list_t *node;
 
-if (homedir == NULL || fp == NULL)
-	return (-1);
-if (node == NULL)
+if (homedir == NULL || fp == NULL || filename == NULL)
 {
-fclose(fp);
+free(filename); /* Free the filename in case of failure */
 return (-1);
 }
 while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL && line_count < HIST_MAX)
@@ -75,16 +68,27 @@ while (fgets(buffer, MAXIMUM_BUFFER_SIZE, fp) != NULL && line_count < HIST_MAX)
 len = strlen(buffer);
 if (len > 0 && buffer[len - 1] == '\n')
 	buffer[len - 1] = '\0';
-
 if (len > 1 || (len == 1 && buffer[0] != '\n'))
 {
+node = malloc(sizeof(list_t));
+if (node == NULL)
+{
+fclose(fp);
+free(filename); /* Free the filename in case of failure */
+free_history(&(info->history));
+/* Free the allocated nodes before returning */
+return (-1);
+}
 node->str = strdup(buffer);
-node->next = info->history;
-info->history = node;
+node->next = head;
+head = node;
 line_count++;
 }
 }
 fclose(fp);
+free(filename); /* Free the filename after usage */
+free_history(&(info->history));
+info->history = head;
 info->line_count = line_count;
 return (0);
 }
