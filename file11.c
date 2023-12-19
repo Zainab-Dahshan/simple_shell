@@ -6,12 +6,13 @@
 */
 int string_length(char *str)
 {
-int z = 0;
+int length = 0;
+
 if (!str)
-return (0);
+	return (0);
 while (*str++)
-z++;
-return (z);
+	length++;
+return (length);
 }
 /**
 * string_compare - a function that performs lexicogarphic
@@ -21,7 +22,7 @@ return (z);
 * Return: negative if str1 < str2, positive if str1 > str2,
 * zero if str1 == str2
 */
-int string_compare(char *str1, char *str2)
+int string_compare(const char *str1, const char *str2)
 {
 while (*str1 && *str2)
 {
@@ -30,12 +31,8 @@ return (*str1 - *str2);
 str1++;
 str2++;
 }
-if (*str1 == *str2)
-return (0);
-else
-return (*str1 < *str2 ? -1 : 1);
+return ((*str1 == *str2) ? 0 : (*str1 < *str2 ? -1 : 1));
 }
-
 /**
 * begins_with - a function that checks if needle
 * starts with haystack
@@ -47,7 +44,7 @@ char *begins_with(const char *haystack, const char *needle)
 {
 while (*needle)
 if (*needle++ != *haystack++)
-return (NULL);
+	return (NULL);
 return ((char *)haystack);
 }
 /**
@@ -59,11 +56,12 @@ return ((char *)haystack);
 char *string_concat(char *destination, char *source)
 {
 char *ret = destination;
+
 while (*destination)
-destination++;
+	destination++;
 while (*source)
-*destination++ = *source++;
-*destination = *source;
+	*destination++ = *source++;
+*destination = '\0'; /* Null-terminate the concatenated string */
 return (ret);
 }
 

@@ -9,14 +9,7 @@ int check_interactive_mode(info_t *info)
 {
 (void)info;
 
-if (isatty(STDIN_FILENO))
-{
-return (1);
-}
-else
-{
-return (0);
-}
+return (isatty(STDIN_FILENO) ? 1 : 0);
 }
 /**
 * check_delimiter - a function that checks if character
@@ -42,10 +35,7 @@ return (0);
 */
 int check_alpha(int c)
 {
-if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-	return (1);
-else
-	return (0);
+return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ? 1 : 0);
 }
 /**
  * string_to_integer - a function that converts a string to an integer.
@@ -59,7 +49,7 @@ else
  */
 int string_to_integer(char *s)
 {
-int z = 0, sign = 1, output = 0;
+int sign = 1, output = 0;
 unsigned long int result = 0;
 
 if (*s == '-')
@@ -71,21 +61,22 @@ else if (*s == '+')
 {
 s++;
 }
-for (z = 0; s[z] != '\0'; z++)
+while (*s != '\0')
 {
-if (s[z] >= '0' && s[z] <= '9')
+if (*s >= '0' && *s <= '9')
 {
 result *= 10;
-result += (s[z] - '0');
+result += (*s - '0');
 if (result > INT_MAX)
 {
-return (sign == -1 ? INT_MIN : INT_MAX);
+return ((sign == -1) ? INT_MIN : INT_MAX);
 }
 }
 else
 {
-return (output);
+return (0); /* Signal an error for non-digit characters */
 }
+s++;
 }
 output = (int)result *sign;
 return (output);

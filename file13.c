@@ -34,6 +34,8 @@ size_t bufferSize = MAXIMUM_BUFFER_SIZE;
 char *inputBuffer = malloc(bufferSize);
 
 if (!inputBuffer)
+	     /* Handle error or return NULL as appropriate */
+	perror("malloc");
 	return (NULL);
 
 memset(inputBuffer, BUFFER_FLUSH, bufferSize);

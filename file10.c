@@ -1,22 +1,24 @@
 #include "shell.h"
+
 /**
-* string_duplicate - a main function that duplicates a string
-* @s: String to duplicate
-* Return: Pointer to a duplicated string
-*/
+ * string_duplicate - Dthis is a function that duplicates a string.
+ * @s: the String to duplicate.
+ * Return: the Pointer to a duplicated string.
+ */
 char *string_duplicate(const char *s)
 {
-int length = 0;
-char *result;
+int length = 0, i = 0;
+char *result = malloc(sizeof(char) * (length + 1));
 
 if (s == NULL)
 	return (NULL);
-while (*s++)
-length++;
-result = malloc(sizeof(char) * (length + 1));
-if (!result)
+while (s[length] != '\0')
+	length++;
+
+if (result == NULL)
 	return (NULL);
-for (length++; length--;)
-result[length] = *--s;
+for (i = 0; i < length; i++)
+	result[i] = s[i];
+result[length] = '\0'; /* Null-terminate the duplicated string */
 return (result);
 }

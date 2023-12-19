@@ -176,10 +176,9 @@ void read_history(info_t *info);
 /* file11.c */
 char *string_concat(char *destination, char *source);
 char *begins_with(const char *haystack, const char *needle);
-int string_compare(char *str1, char *str2);
+int string_compare(const char *str1, const char *str2);
 int string_length(char *str);
 /* file12.c */
-int shell_execute(info_t *info);
 int search_builtin(info_t *info);
 void search_command(info_t *info);
 void execute_command(info_t *info);

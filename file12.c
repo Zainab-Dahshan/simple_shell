@@ -24,9 +24,12 @@ _putchar('\n');
 write_history(info);
 if (builtin_ret == -2)
 {
-if (info->error_number == -1)
+if (info && info->error_number == -1)
 	exit(info->status);
-exit(info->error_number);
+else if (info)
+	exit(info->error_number);
+else
+exit(EXIT_FAILURE); /* Handle unexpected error */
 }
 exit(info->status);
 return (builtin_ret);
@@ -52,17 +55,8 @@ builtin_table builtintbl[] = {
 {"alias", display_alias},
 {NULL, NULL}
 };
-/* Check if the info parameter is valid */
-if (!info)
-{
-return (built_in_ret);
-}
-/* Check if the argv array is properly initialized */
-if (!info->argv)
-{
-return (built_in_ret);
-}
-/* Iterate through the built-in table to find a match */
+if (!info || !info->argv)
+	return (built_in_ret);
 for (i = 0; builtintbl[i].type; i++)
 {
 if (strcmp(info->argv[0], builtintbl[i].type) == 0)
