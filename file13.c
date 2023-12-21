@@ -5,8 +5,7 @@
 * @inputBuffer: Buffer address
 * Return: bytes that read
 */
-ssize_t bufferInput(info_t *info __attribute__((unused)),
-		char **inputBuffer)
+ssize_t bufferInput(info_t *info, char **inputBuffer)
 {
 ssize_t readBytes = 0;
 size_t len_p = 0;
@@ -15,9 +14,11 @@ free(*inputBuffer);
 *inputBuffer = NULL;
 signal(SIGINT, signalInterruptHandler);
 readBytes = getline(inputBuffer, &len_p, stdin);
-
 if (readBytes == -1)
-	return (-1);
+{
+/* Handle error or return -1 as appropriate */
+perror("getline");
+}
 return (readBytes);
 }
 /**
@@ -34,12 +35,12 @@ size_t bufferSize = MAXIMUM_BUFFER_SIZE;
 char *inputBuffer = malloc(bufferSize);
 
 if (!inputBuffer)
-	     /* Handle error or return NULL as appropriate */
-	perror("malloc");
-	return (NULL);
-
+{
+/* Handle error or return NULL as appropriate */
+perror("malloc");
+return (NULL);
+}
 memset(inputBuffer, BUFFER_FLUSH, bufferSize);
-
 while ((bytesRead = bufferInput(info, &inputBuffer)) > 0)
 {
 if (totalBytesRead + bytesRead >= bufferSize - 1)

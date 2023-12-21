@@ -7,7 +7,7 @@
  */
 char **get_environment_strings(info_t *info)
 {
-if (!info->environ || info->env_changed)
+if (info->env_changed)
 {
 info->env_changed = 0;
 }

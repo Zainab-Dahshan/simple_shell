@@ -44,10 +44,11 @@ return (0);
 void free_history(list_t **head)
 {
 list_t *node = *head;
-list_t *temp = node->next;
+list_t *temp;
 
 while (node != NULL)
 {
+temp = node->next;
 free(node->str);
 free(node);
 node = temp;

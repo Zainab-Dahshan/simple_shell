@@ -188,7 +188,7 @@ int find_builtin(info_t *info);
 void find_command(info_t *info);
 void fork_command(info_t *info);
 /* file13.c */
-ssize_t bufferInput(info_t *info __attribute__((unused)), char **inputBuffer);
+ssize_t bufferInput(info_t *info, char **inputBuffer);
 char *retrieveInput(info_t *info);
 ssize_t readBuffer(info_t *info, char *buffer, size_t *index);
 int getLine(info_t *info, char **pointer, size_t *length);
@@ -214,6 +214,8 @@ int add_history(info_t *info, const char *line);
 void free_history(list_t **head);
 /* file16-2.c */
 void close_history_file(FILE *fp);
+void free_history_node(list_t *node);
+list_t *allocate_history_node(const char *line);
 /* file17.c */
 int add_node(list_t **head, char *str);
 int add_node_end(list_t **head, char *str);
