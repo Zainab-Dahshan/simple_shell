@@ -9,9 +9,9 @@
  */
 int handle_exit(info_t *info)
 {
-if (info->argv[1]) /* If there is an exit argument */
+if (info->argv[0] && strcmp(info->argv[0], "exit") == 0)
 {
-int exit_status = atoi(info->argv[1]);
+int exit_status = (info->argv[1]) ? atoi(info->argv[1]) : 0;
 
 exit(exit_status);
 }
@@ -25,37 +25,24 @@ return (0);
  */
 int handle_cd(info_t *info)
 {
-char *path = info->argv[1];
+char *path = (info->argv[1]) ? info->argv[1] : getenv("HOME");
 char *oldpwd = getenv("PWD");
-char *newpwd = NULL;
+char *newpwd = realpath(path, NULL);
 
-if (path == NULL || strlen(path) == 0)
-{
-path = getenv("HOME");
-}
-else
-{
-newpwd = realpath(path, NULL);
 if (newpwd == NULL)
 {
-write(STDOUT_FILENO, "cd: ", 4);
-write(STDOUT_FILENO, path, strlen(path));
-write(STDOUT_FILENO, ": No such file or directory\n", 28);
+dprintf(STDOUT_FILENO, "cd: %s: No such file or directory\n", path);
 return (1);
-}
 }
 if (chdir(newpwd) == -1)
 {
-write(STDOUT_FILENO, "cd: ", 4);
-write(STDOUT_FILENO, path, strlen(path));
-write(STDOUT_FILENO, ": Permission denied\n", 20);
+dprintf(STDOUT_FILENO, "cd: %s: Permission denied\n", path);
 free(newpwd);
 return (1);
 }
-
 setenv("OLDPWD", oldpwd, 1);
 setenv("PWD", newpwd, 1);
-free(newpwd); /* Free an allocated memory for newpwd */
+free(newpwd);
 return (0);
 }
 /**
@@ -66,14 +53,14 @@ return (0);
  */
 int check_help(info_t *info)
 {
-char **arg_array = info->argv;
-
+if (info->argv && *info->argv)
+{
+dprintf(STDOUT_FILENO, "%s\n", *info->argv);
+}
+else
+{
 write(STDOUT_FILENO,
 	"Help function called. Function not yet implemented.\n", 51);
-if (arg_array && *arg_array)
-{
-write(STDOUT_FILENO, *arg_array, strlen(*arg_array));
-write(STDOUT_FILENO, "\n", 1);
 }
 return (0);
 }

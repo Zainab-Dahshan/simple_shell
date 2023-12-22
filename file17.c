@@ -9,9 +9,18 @@ int add_node(list_t **head, char *str)
 {
 list_t *new_head = malloc(sizeof(list_t));
 
-if (new_head == NULL)
-	return (-1);
+if (!new_head)
+{
+perror("Error: Unable to allocate memory");
+return (-1);
+}
 new_head->str = strdup(str);
+if (!new_head->str)
+{
+perror("Error: Unable to duplicate string");
+free(new_head);
+return (-1);
+}
 new_head->next = *head;
 *head = new_head;
 return (0);
@@ -25,18 +34,26 @@ return (0);
 int add_node_end(list_t **head, char *str)
 {
 list_t *new_node = malloc(sizeof(list_t));
-list_t *node = *head;
 
-if (new_node == NULL)
-	return (-1);
+if (!new_node)
+{
+perror("Error: Unable to allocate memory");
+return (-1);
+}
 new_node->str = strdup(str);
+if (!new_node->str)
+{
+perror("Error: Unable to duplicate string");
+free(new_node);
+return (-1);
+}
 new_node->next = NULL;
-
 if (*head == NULL)
 {
 *head = new_node;
 return (0);
 }
+list_t *node = *head;
 while (node->next != NULL)
 node = node->next;
 node->next = new_node;
@@ -70,11 +87,8 @@ return (x);
 void free_list(list_t **head_ptr)
 {
 list_t *node, *next_node, *head;
-
-if (!head_ptr || !*head_ptr)
-	return;
 head = *head_ptr;
-node = head;
+
 while (node)
 {
 next_node = node->next;

@@ -87,21 +87,22 @@ char *var_start = strchr(info->argv[i], '$');
 char *var_end = strchr(var_start, ' ');
 char var_name[65];
 
-for (i = 0; i < MAXIMUM_ARGUMENTS; i++)
+while (info->argv[i] != NULL)
 {
-if (info->argv[i] != NULL)
-{
-if (var_start != NULL)
+while (var_start != NULL)
 {
 if (var_end != NULL)
 {
 strncpy(var_name, var_start + 1, sizeof(var_name) - 1);
 var_name[sizeof(var_name) - 1] = '\0';
-/* Replace variable with its value */
-/* using info->env_head or appropriate variable */
+/*
+ * Replace variable with its value using
+ * info->env_head or appropriate variable
+ */
 }
+var_start = strchr(var_end, '$');
 }
-}
+i++;
 }
 }
 /**

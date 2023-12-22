@@ -224,7 +224,7 @@ int delete_node_at_index(list_t **head, int index);
 void free_list(list_t **head_ptr);
 /* file19.c */
 char *_memset(char *s, char b, unsigned int n);
-void ffree(char **pp);
+void ffree(char ***pp);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 /* file20.v */
 int is_chain(info_t *info);

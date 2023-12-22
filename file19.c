@@ -8,28 +8,27 @@
 */
 char *_memset(char *s, char b, unsigned int n)
 {
-unsigned int z = 0;
-
-while (z < n)
-{
+for (unsigned int z = 0; z < n; z++)
 s[z] = b;
-z++;
-}
 return (s);
 }
 /**
 * ffree - this function is responsible for freeing a string of strings
 * @pp: string of strings
 */
-void ffree(char **pp)
+void ffree(char ***pp)
 {
-char **a = pp;
+char **p = *pp;
 
-if (!pp)
+if (!pp || !*pp)
 	return;
-while (*pp)
-free(*pp++);
-free(a);
+while (*p)
+{
+free(*p);
+p++;
+}
+free(*pp);
+*pp = NULL;
 }
 /**
 * _realloc - this function is specific to reallocate a block of memory
@@ -40,22 +39,23 @@ free(a);
 */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-char *p;
+char *p = malloc(new_size);
+unsigned int min_size = old_size < new_size ? old_size : new_size;
 
 if (!ptr)
 	return (malloc(new_size));
+
 if (!new_size)
-	return (free(ptr), NULL);
+{
+free(ptr);
+return (NULL);
+}
 if (new_size == old_size)
 	return (ptr);
-p = malloc(new_size);
-
 if (!p)
 	return (NULL);
-old_size = old_size < new_size ? old_size : new_size;
-
-while (old_size--)
-	p[old_size] = ((char *)ptr)[old_size];
+for (unsigned int i = 0; i < min_size; i++)
+p[i] = ((char *)ptr)[i];
 free(ptr);
 return (p);
 }
