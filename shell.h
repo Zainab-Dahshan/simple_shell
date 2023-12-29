@@ -76,6 +76,8 @@ struct list_s *next;
  * @environ: An array of strings that represents environment variables.
  * @env_changed: A flag indicates whether environment variables have changed.
  * @path: The path to executable files.
+ * @history_list_file_path: The file path for the history list.
+ * @history_file_path: The file path for the history file.
  * Description:`info_t` struct is used to store information
  * about a program execution. It contains pointers to linked lists for
  * command history and aliases, as well as number of arguments passed
@@ -102,6 +104,8 @@ char **environ;
 int env_changed;
 char *path;
 char *tokens;
+const char *history_list_file_path;
+const char *history_file_path;
 } info_t;
 
 /**
@@ -203,9 +207,9 @@ void initialize_info_struct(info_t *info);
 void populate_info_struct(info_t *info, int argc, char **argv);
 void release_info_struct(info_t *info);
 /* file16 */
-char *get_history_file(const char *homedir);
+void get_history_file(info_t *info);
 int write_history(info_t *info);
-int read_history_list(info_t *info);
+void read_history_list(info_t *info);
 FILE *open_history_file(const char *filename);
 int write_history_node(FILE *fp, const list_t *node);
 /* file16-1.c */

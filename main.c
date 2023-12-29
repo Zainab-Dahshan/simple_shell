@@ -74,6 +74,8 @@ return (EXIT_FAILURE);
 populate_environment_list(&env_head);
 read_history_list(info);
 find_command(info);
+get_history_file(info);
+read_history_list(info);
 /* Free the allocated memory */
 free(info->argv);
 free(info->path);
