@@ -8,7 +8,8 @@
 */
 char *_memset(char *s, char b, unsigned int n)
 {
-for (unsigned int z = 0; z < n; z++)
+unsigned int z;/* Declare z before the loop */
+for (z = 0; z < n; z++)
 s[z] = b;
 return (s);
 }
@@ -41,6 +42,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 char *p = malloc(new_size);
 unsigned int min_size = old_size < new_size ? old_size : new_size;
+unsigned int i;/* Declare i before the loop */
 
 if (!ptr)
 	return (malloc(new_size));
@@ -54,7 +56,7 @@ if (new_size == old_size)
 	return (ptr);
 if (!p)
 	return (NULL);
-for (unsigned int i = 0; i < min_size; i++)
+for (i = 0; i < min_size; i++)
 p[i] = ((char *)ptr)[i];
 free(ptr);
 return (p);

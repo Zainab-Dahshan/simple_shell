@@ -32,7 +32,7 @@ int w = 0, number_words = 0;
 
 while (str[w] != '\0')
 {
-if (str[w] != delimiter && str[w + 1] == delimiter)
+if (str[w] != delimiter && (str[w + 1] == delimiter || str[w + 1] == '\0'))
 	number_words++;
 w++;
 }

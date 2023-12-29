@@ -65,6 +65,14 @@ return;
 }
 else if (child_pid == 0)
 {
+if (execve(info->path, info->argv, environ) == -1)
+{
+perror("execve Error:");
+exit(EXIT_FAILURE);
+}
+}
+else if (child_pid == 0)
+{
 execve(info->path, info->argv, environ);
 exit(EXIT_FAILURE);
 }

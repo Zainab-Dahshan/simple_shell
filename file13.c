@@ -7,6 +7,7 @@
 */
 ssize_t bufferInput(info_t *info, char **inputBuffer)
 {
+(void)info;/* Unused parameter */
 ssize_t readBytes = 0;
 size_t len_p = 0;
 

@@ -81,6 +81,7 @@ if (!check_delimiter(*str, d))
 s[i] = _copy_word(str, d);
 if (s[i] == NULL)
 {
+/* free previously allocated memory on error */
 while (i > 0)
 	free(s[--i]);
 free(s);

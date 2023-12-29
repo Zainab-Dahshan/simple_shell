@@ -34,6 +34,7 @@ return (0);
 int add_node_end(list_t **head, char *str)
 {
 list_t *new_node = malloc(sizeof(list_t));
+list_t *node = *head;
 
 if (!new_node)
 {
@@ -53,7 +54,6 @@ if (*head == NULL)
 *head = new_node;
 return (0);
 }
-list_t *node = *head;
 while (node->next != NULL)
 node = node->next;
 node->next = new_node;
@@ -86,8 +86,8 @@ return (x);
  */
 void free_list(list_t **head_ptr)
 {
-list_t *node, *next_node, *head;
-head = *head_ptr;
+list_t *node, *next_node;
+node = *head_ptr;
 
 while (node)
 {
