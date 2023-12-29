@@ -9,8 +9,8 @@ ssize_t bufferInput(info_t *info, char **inputBuffer)
 {
 (void)info;
 
-ssize_t readBytes = 0;
-size_t len_p = 0;
+ssize_t readBytes;
+size_t len_p;
 
 free(*inputBuffer);
 *inputBuffer = NULL;
