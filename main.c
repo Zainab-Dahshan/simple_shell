@@ -54,6 +54,7 @@ list_t *env_head = NULL;
 if (argc < 2)
 {
 printf("Usage: %s <filename>\n", argv[0]);
+free(info);
 return (EXIT_FAILURE);
 }
 if (info == NULL)
