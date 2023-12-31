@@ -50,6 +50,8 @@ int main(int argc, char **argv)
 {
 info_t *info = malloc(sizeof(info_t));
 list_t *env_head = NULL;
+const char *input = "/bin/ls /bin/ls /bin/ls /bin/ls";
+
 
 if (argc < 2)
 {
@@ -78,6 +80,7 @@ hsh(info);
 find_command(info);
 get_history_file(info);
 read_history_list(info);
+tokenize_and_print(input);
 /* Free the allocated memory */
 free(info->argv);
 free(info->path);

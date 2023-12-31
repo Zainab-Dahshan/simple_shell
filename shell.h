@@ -157,6 +157,7 @@ int unset_environment(info_t *info);
 void populate_environment_list(list_t **head);
 /* file5.c */
 int execute_external_command(info_t *info);
+void tokenize_and_print(const char *input);
 /* file6.c */
 int print_character(char character);
 int print_string(const char *input);
