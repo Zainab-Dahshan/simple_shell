@@ -155,6 +155,8 @@ char *get_environment(info_t *info, const char *name);
 int set_environment(info_t *info);
 int unset_environment(info_t *info);
 void populate_environment_list(list_t **head);
+/* file5.c */
+int execute_external_command(info_t *info);
 /* file6.c */
 int print_character(char character);
 int print_string(const char *input);

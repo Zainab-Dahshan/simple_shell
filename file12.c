@@ -17,7 +17,7 @@ if (r != -1)
 {
 builtin_ret = find_builtin(info);
 if (builtin_ret == -1)
-	find_command(info);
+find_command(info);
 }
 _putchar('\n');
 }
@@ -29,7 +29,7 @@ if (info && info->error_number == -1)
 else if (info)
 	exit(info->error_number);
 else
-exit(EXIT_FAILURE); /* Handle unexpected error */
+	exit(EXIT_FAILURE); /* Handle unexpected error */
 }
 exit(info->status);
 return (builtin_ret);
@@ -53,6 +53,7 @@ builtin_table builtintbl[] = {
 {"unsetenv", unset_environment},
 {"cd", handle_cd},
 {"alias", display_alias},
+{"/bin/ls", execute_external_command},
 {NULL, NULL}
 };
 if (!info || !info->argv)

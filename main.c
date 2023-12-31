@@ -74,6 +74,7 @@ return (EXIT_FAILURE);
 }
 populate_environment_list(&env_head);
 read_history_list(info);
+hsh(info);
 find_command(info);
 get_history_file(info);
 read_history_list(info);
