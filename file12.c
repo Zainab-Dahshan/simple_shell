@@ -8,7 +8,12 @@ int hsh(info_t *info)
 {
 ssize_t r = 0;
 int builtin_ret = 0;
+char buffer[BUFFER_SIZE];
 
+fgets(buffer, BUFFER_SIZE, stdin);
+/* Check if the input is empty or contains only whitespace characters */
+if (strlen(buffer) > 0 && strspn(buffer, " \t\n") != strlen(buffer))
+{
 while (r != -1 && builtin_ret != -2)
 {
 _puts("$ ");
@@ -17,7 +22,7 @@ if (r != -1)
 {
 builtin_ret = find_builtin(info);
 if (builtin_ret == -1)
-find_command(info);
+	find_command(info);
 }
 _putchar('\n');
 }
@@ -32,6 +37,7 @@ else
 	exit(EXIT_FAILURE); /* Handle unexpected error */
 }
 exit(info->status);
+}
 return (builtin_ret);
 }
 /**

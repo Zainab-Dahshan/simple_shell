@@ -22,6 +22,7 @@
 #define INFO_INIT \
 {0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, \
 	NULL, 0, 0, NULL, NULL, 0, NULL}
+#define BUFFER_SIZE 1024
 #define READ_BUFFER_SIZE 1024
 #define MAXIMUM_BUFFER_SIZE 1024
 #define BUFFER_FLUSH '\n'
@@ -158,6 +159,7 @@ void populate_environment_list(list_t **head);
 /* file5.c */
 int execute_external_command(info_t *info);
 void tokenize_and_print(const char *input);
+void parse_input(char *input);
 /* file6.c */
 int print_character(char character);
 int print_string(const char *input);

@@ -48,3 +48,69 @@ printf("%s\n", command);
 command = strtok(NULL, " ");
 }
 }
+/**
+ * parse_input - this function parses input and splits it
+ * into separate commands and handles quoted strings and escaped characters.
+ * @input: The input string to be parsed.
+ *
+ * This function takes a string as input and parses it into separate commands.
+ * It handles quoted strings and escaped characters. A quoted string is defined
+ * as any sequence of characters enclosed in double quotes. Characters inside a
+ * quoted string are treated as a single command, even if they include spaces.
+ * An escaped character is defined as a backslash followed by any character.
+ * The backslash causes the next character to be treated literally,
+ * even if it's a space or a quote.
+ *
+ * The function uses a state machine to keep track of whether it's currently
+ * inside a quoted string or not. It iterates through each character in
+ * the input string. If it encounters a space outside of a quoted string,
+ * it treats it as a delimiter and adds the current command to the list of
+ * commands. If it encounters a double quote, it toggles the inside_quote flag.
+ * If it encounters a backslash, it treats the next character as a literal
+ * character. Otherwise, it adds the character to the current command.
+ *
+ * At the end of the function, it prints all the commands it has parsed.
+ * It also frees the memory allocated for the command string.
+ */
+void parse_input(char *input)
+{
+char *command = malloc(BUFFER_SIZE);
+int index = 0;
+bool inside_quote = false;
+int i = 0;
+
+for (i = 0; input[i] != '\0'; ++i)
+{
+switch (input[i])
+{
+case ' ':
+if (!inside_quote && index > 0)
+{
+command[index++] = '\0';
+printf("%s\n", command);
+index = 0;
+}
+else
+{
+command[index++] = input[i];
+}
+break;
+case '"':
+inside_quote = !inside_quote;
+break;
+case '\\':
+if (input[i + 1] != '\0')
+{
+command[index++] = input[++i];
+}
+break;
+default:
+command[index++] = input[i];
+break;
+}
+}
+if (index > 0)
+	command[index] = '\0';
+printf("%s\n", command);
+free(command);
+}
