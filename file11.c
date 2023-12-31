@@ -4,7 +4,7 @@
 * @str: A string whose length to check
 * Return: An integer length of string
 */
-int string_length(char *str)
+int string_length(const char *str)
 {
 int length = 0;
 
@@ -64,4 +64,20 @@ while (*source)
 *destination = '\0'; /* Null-terminate the concatenated string */
 return (ret);
 }
+/**
+* create_string - a function that creates a new string
+* @input: The original string
+* Return: A pointer to the new string
+*/
+char *create_string(const char *input)
+{
+int length = string_length(input);
+char *new_string = malloc((length + 1) * sizeof(char));
 
+if (new_string == NULL)
+{
+return (NULL);
+}
+strcpy(new_string, input);
+return (new_string);
+}

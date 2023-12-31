@@ -7,18 +7,21 @@
  */
 char *string_duplicate(const char *s)
 {
-int length = 0, i = 0;
-char *result = malloc(sizeof(char) * (length + 1));
+int length = 0;
+char *result;
+int i = 0;
 
 if (s == NULL)
 	return (NULL);
 while (s[length] != '\0')
 	length++;
+result = malloc(sizeof(char) * (length + 1));
 
 if (result == NULL)
-	return (NULL);
+return (NULL);
 for (i = 0; i < length; i++)
 	result[i] = s[i];
 result[length] = '\0'; /* Null-terminate the duplicated string */
 return (result);
 }
+

@@ -11,8 +11,11 @@ ssize_t readBytes;
 size_t len_p;
 (void)info;
 
+if (*inputBuffer != NULL)
+{
 free(*inputBuffer);
 *inputBuffer = NULL;
+}
 signal(SIGINT, signalInterruptHandler);
 readBytes = getline(inputBuffer, &len_p, stdin);
 if (readBytes == -1)

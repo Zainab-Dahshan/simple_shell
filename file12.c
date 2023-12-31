@@ -11,6 +11,15 @@ int builtin_ret = 0;
 char buffer[BUFFER_SIZE];
 
 fgets(buffer, BUFFER_SIZE, stdin);
+if (buffer[strlen(buffer) - 1] != '\n')
+{
+/* Clear the buffer */
+memset(buffer, 0, BUFFER_SIZE);
+/* Prompt the user to enter a shorter line */
+_puts("Line too long. Please enter a shorter line.\n");
+/* Read the line again */
+fgets(buffer, BUFFER_SIZE, stdin);
+}
 /* Check if the input is empty or contains only whitespace characters */
 if (strlen(buffer) > 0 && strspn(buffer, " \t\n") != strlen(buffer))
 {
@@ -40,6 +49,7 @@ exit(info->status);
 }
 return (builtin_ret);
 }
+
 /**
  * find_builtin - A function that finds if a given command is a built-in
  * command and calls a corresponding function.

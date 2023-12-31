@@ -186,7 +186,8 @@ void read_history(info_t *info);
 char *string_concat(char *destination, char *source);
 char *begins_with(const char *haystack, const char *needle);
 int string_compare(const char *str1, const char *str2);
-int string_length(char *str);
+int string_length(const char *str);
+char *create_string(const char *input);
 /* file12.c */
 int search_builtin(info_t *info);
 void search_command(info_t *info);
