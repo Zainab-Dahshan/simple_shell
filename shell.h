@@ -223,7 +223,7 @@ int renumber_history(info_t *info);
 int add_history(info_t *info, const char *line);
 void free_history(list_t **head);
 /* file16-2.c */
-void close_history_file(FILE *fp);
+int close_history_file(FILE *fp);
 void free_history_node(list_t *node);
 list_t *allocate_history_node(const char *line);
 /* file17.c */

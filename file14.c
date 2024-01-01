@@ -27,12 +27,12 @@ size_t z = 0;
 char *p;
 
 if (!node || !variableName)
-	return (0);
+	return (1);
 while (node)
 {
 p = node->str;
 
-if (p && *p == '=')
+if (p && strncmp(p, variableName, strlen(variableName)) == 0)
 {
 info->env_changed = delete_node_at_index(&(info->env_head), z);
 z = 0;
@@ -42,7 +42,7 @@ continue;
 node = node->next;
 z++;
 }
-return (info->env_changed);
+return (info->env_changed ? 0 : 1);
 }
 /**
  * set_environment_variable - a function that sets an environment
@@ -60,7 +60,7 @@ list_t *node;
 char *p = NULL;
 
 if (!variableName || !variableValue)
-	return (0);
+	return (1);
 buffer = malloc(strlen(variableName) + strlen(variableValue) + 2);
 if (!buffer)
 	return (1);
@@ -70,7 +70,8 @@ strcat(buffer, variableValue);
 node = info->env_head;
 while (node)
 {
-if (p && *p == '=')
+p = node->str;
+if (p && strncmp(p, variableName, strlen(variableName)) == 0)
 {
 free(node->str);
 node->str = buffer;
@@ -81,5 +82,5 @@ node = node->next;
 }
 free(buffer);
 info->env_changed = 1;
-return (0);
+return (1);
 }

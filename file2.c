@@ -53,14 +53,15 @@ return (0);
  */
 int check_help(info_t *info)
 {
+const char *msg = "Help function called. Function not yet implemented.\n";
+
 if (info->argv && *info->argv)
 {
 dprintf(STDOUT_FILENO, "%s\n", *info->argv);
 }
 else
 {
-write(STDOUT_FILENO,
-	"Help function called. Function not yet implemented.\n", 51);
+write(STDOUT_FILENO, msg, strlen(msg));
 }
 return (0);
 }

@@ -12,9 +12,7 @@ char **_strtow2(char *str, char delimiter)
 int number_words = count_words(str, delimiter);
 char **s = allocate_memory(number_words);
 
-if (number_words == 0)
-	return (NULL);
-if (!s)
+if (number_words == 0 || !s)
 	return (NULL);
 copy_words(s, str, delimiter, number_words);
 return (s);
@@ -47,6 +45,12 @@ return (number_words);
 char **allocate_memory(int number_words)
 {
 char **s = malloc((1 + number_words) * sizeof(char *));
+
+if (!s)
+{
+perror("Memory allocation failed");
+exit(EXIT_FAILURE);
+}
 return (s);
 }
 /**
@@ -73,7 +77,8 @@ if (!s[x])
 while (y < x)
 	free(s[y++]);
 free(s);
-return;
+perror("Memory allocation failed");
+exit(EXIT_FAILURE);
 }
 while (z < y)
 {

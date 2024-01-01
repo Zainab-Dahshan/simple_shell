@@ -9,6 +9,12 @@
 char *_memset(char *s, char b, unsigned int n)
 {
 unsigned int z;/* Declare z before the loop */
+/* Check if n is within the bounds of the memory block */
+if (n > sizeof(s))
+{
+printf("Error: n is out of bounds.\n");
+return (NULL);
+}
 for (z = 0; z < n; z++)
 s[z] = b;
 return (s);

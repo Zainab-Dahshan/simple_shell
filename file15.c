@@ -7,7 +7,7 @@ void initialize_info_struct(info_t *info)
 {
 info->argc = 0;
 info->argv = NULL;
-info->path = '\0';
+info->path = NULL;
 info->status = 0;
 }
 /**
@@ -45,12 +45,21 @@ info->argv[argc] = NULL;
  */
 void release_info_struct(info_t *info)
 {
+int i = 0;
+
+if (info->argv != NULL)
+{
+for (i = 0; i < info->argc; i++)
+{
+free(info->argv[i]);
+}
 free(info->argv);
+info->argv = NULL;
+}
 /* Check if info->path is dynamically allocated before freeing */
 if (info->path != NULL)
 {
 free(info->path);
 info->path = NULL; /* Set to NULL after freeing */
 }
-info->argv = NULL;
 }

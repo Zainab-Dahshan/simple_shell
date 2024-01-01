@@ -49,24 +49,29 @@ count++;
  * @base:  A base for conversion (e.g., 10 for decimal, 16 for hexadecimal).
  * @flags: Additional flags for conversion (e.g., CONVERT_UNSIGNED to
  * convert an unsigned number).
+ * @number: The number to convert.
  * Return: A converted string representation of a number.
  */
-char *number_converter(long int num, int base, int flags)
+char *number_converter(long int number, int base, int flags)
 {
 static char *array;
-static char buffer[50];
+char *buffer = malloc(BUFFER_SIZE * sizeof(char));
 char sign = 0;
 char *ptr;
-int number = num;
-unsigned long n = num;
+unsigned long n = number;
 
+if (buffer == NULL)
+{
+perror("Failed to allocate memory");
+exit(EXIT_FAILURE);
+}
 if (!(flags & CONVERT_UNSIGNED) && number < 0)
 {
 n = -number;
 sign = '-';
 }
 array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
-ptr = &buffer[49];
+ptr = &buffer[BUFFER_SIZE - 1];
 *ptr = '\0';
 do {
 *--ptr = array[n % base];
@@ -106,6 +111,11 @@ break;
  */
 void display_error(info_t *info, char *estr)
 {
+if (info == NULL || info->argv[0] == NULL)
+{
+printf("Error: Invalid arguments.\n");
+return;
+}
 printf("%s: ", info->fname);
 printf("%d: ", info->line_count);
 printf("%s: ", info->argv[0]);

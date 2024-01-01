@@ -16,7 +16,10 @@ while (fgets(buffer, sizeof(buffer), file) != NULL)
 {
 printf("%s", buffer);
 }
-fclose(file);
+if (fclose(file) != 0)
+{
+perror("Error closing file");
+}
 }
 else
 {
@@ -40,7 +43,10 @@ while (fgets(buffer, sizeof(buffer), file) != NULL)
 {
 printf("%s", buffer);
 }
-fclose(file);
+if (fclose(file) != 0)
+{
+perror("Error closing file");
+}
 }
 else
 {

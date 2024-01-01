@@ -16,6 +16,7 @@ while (src[x] != '\0' && x < n)
 dest[x] = src[x];
 x++;
 }
+dest[x] = '\0'; /* Ensure null termination */
 return (dest);
 }
 /**
@@ -53,11 +54,14 @@ return (dest);
  */
 char *our_strchr(const char *s, char c)
 {
+if (s == NULL) /* Check if source string is not null */
+	return (NULL);
 while (*s != '\0')
 {
 if (*s == c)
-return ((char *) s);
+	return ((char *) s);
 s++;
 }
 return (NULL);
 }
+

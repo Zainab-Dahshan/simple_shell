@@ -17,10 +17,18 @@ return (0);
 /**
  * close_history_file - Closes the history file
  * @fp: FILE pointer to the history file
+ * Return: 0 on success, EOF on failure
  */
-void close_history_file(FILE *fp)
+int close_history_file(FILE *fp)
 {
-fclose(fp);
+int result = fclose(fp);
+
+if (result != 0)
+{
+perror("Error closing history file");
+return (EOF);
+}
+return (0);
 }
 /**
  * allocate_history_node - Allocates memory for a new history node
@@ -30,6 +38,7 @@ fclose(fp);
 list_t *allocate_history_node(const char *line)
 {
 list_t *node = malloc(sizeof(list_t));
+
 if (node == NULL)
 {
 perror("Error allocating memory for history node");

@@ -72,7 +72,7 @@ size_t x = 0;
 while (h)
 {
 puts(h->str ? h->str : "(nil)");
-puts("\n");
+putchar('\n');
 h = h->next;
 x++;
 }

@@ -52,7 +52,6 @@ info_t *info = malloc(sizeof(info_t));
 list_t *env_head = NULL;
 const char *input = "/bin/ls /bin/ls /bin/ls /bin/ls";
 
-
 if (argc < 2)
 {
 printf("Usage: %s <filename>\n", argv[0]);

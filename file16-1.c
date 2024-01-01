@@ -31,9 +31,13 @@ if (node == NULL)
 	return (-1);
 
 node->str = strdup(line);
+if (node->str == NULL)
+{
+free(node);
+return (-1);
+}
 node->next = info->history;
 info->history = node;
-
 renumber_history(info);
 return (0);
 }
@@ -50,6 +54,7 @@ while (node != NULL)
 {
 temp = node->next;
 free(node->str);
+node->str = NULL;
 free(node);
 node = temp;
 }

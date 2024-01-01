@@ -79,6 +79,11 @@ int index = 0;
 bool inside_quote = false;
 int i = 0;
 
+if (command == NULL)
+{
+fprintf(stderr, "Failed to allocate memory for command.\n");
+return;
+}
 for (i = 0; input[i] != '\0'; ++i)
 {
 switch (input[i])
@@ -113,4 +118,5 @@ if (index > 0)
 	command[index] = '\0';
 printf("%s\n", command);
 free(command);
+command = NULL;
 }

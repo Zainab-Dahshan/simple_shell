@@ -11,6 +11,7 @@ FILE *fp = fopen(filename, "w");
 if (fp == NULL)
 {
 perror("Error opening history file");
+return (NULL);
 }
 return (fp);
 }
@@ -23,7 +24,7 @@ int write_history(info_t *info)
 {
 char *homedir = getenv("HOME");
 const char *filename = info->history_file_path;
-FILE *fp = fopen(filename, "w");
+FILE *fp = open_history_file(filename);
 int success = 0;
 list_t *node = info->history;
 
@@ -38,6 +39,10 @@ while (node != NULL && success == 0)
 success = write_history_node(fp, node);
 node = node->next;
 }
-fclose(fp);
+if (fclose(fp) != 0)
+{
+perror("Error closing history file");
+return (-1);
+}
 return (success == 0 ? 1 : -1);
 }

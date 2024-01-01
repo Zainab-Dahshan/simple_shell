@@ -113,7 +113,15 @@ i++;
 */
 int replace_string(char **old, char *new)
 {
+if (*old != NULL)
+{
 free(*old);
-*old = new;
+}
+*old = malloc(strlen(new) + 1); /* Allocate memory for the new string */
+if (*old == NULL)
+{
+return (0); /* Memory allocation failed */
+}
+strcpy(*old, new); /* Copy the new string into the old string */
 return (1);
 }
